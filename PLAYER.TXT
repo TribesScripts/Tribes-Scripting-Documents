@@ -1,0 +1,322 @@
+Player Functions 
+ Updated 04/16/99 
+
+Player::getClient(PlayerId) 
+ 
+PlayerId: The players object Id. Example: 8361 
+USED IN: BaseProjData.cs, Game.cs, Item.cs, Objectives.cs, ... 
+RETURN: Client Id. Example: 2049. If failed then -1.  
+Used to get the Clients Id from the Players Id.  
+
+Player::setDetectParameters(Player, MinSize, HazeFac) 
+ 
+Player: The object Id. Example: 8361. 
+MinSize: The minimum size that the enemy object must appear before there will 
+             be a direct LOS on that object. 
+HazeFac: Haze factor.
+USED IN: Currently not used in any script files. 
+RETURN: True if succeed or False if failed.  
+Used to set what the size and haze factor must be before a sensor or player can have a direct LOS on the enemy object.  
+
+Player::setAnimation(Player or Client, AnimIndx) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+AnimIndx: The index of the animation number to play. Players Animations 
+              are setup in the Players data block (PlayerData). Look in the 
+              ArmorData.cs file for examples of the PlayerData blocks.
+USED IN: Player.cs 
+RETURN: True if succeed or False if failed.  
+Used to play an animation on a Player.  
+
+Player::getArmor(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049.
+USED IN: Item.cs, Player.cs, Station.cs, Vehicle.cs 
+RETURN: Armor Type. There are five armor types: larmor, marmor, harmor, lfemale, mfemale.  
+Used to get what armor type the Player or Client is using.  
+
+Player::incItemCount(Player or Client, Item, <Amount>) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Item: The data block name of the item. Example: Chaingun 
+Amount: Amount to increment the Item count by.
+USED IN: Item.cs, Station.cs 
+RETURN: New Item total. If failed then 0. 
+Used to increment the players Item count by Amount. If no Amount argument is passed in then the Item count is incremented by one.  
+
+Player::decItemCount(Player or Client, Item, <Amount>) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Item: The data block name of the item. Example: Chaingun 
+Amount: Amount to decrement the Item count by.
+USED IN: Item.cs, Player.cs 
+RETURN: New Item total. If failed then 0. 
+Used to decrement the players Item count by Amount. If no Amount argument is passed in then the Item count is decremented by one.  
+
+Player::setItemCount(Player or Client, Item, Amount) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Item: The data block name of the item. Example: Chaingun 
+Amount: Amount to set the Item count to.
+USED IN: Ai.cs, Dm.cs, Item.cs, Objectives.cs 
+RETURN: New Item total. If failed then 0. 
+Used to set the players Item count to Amount.  
+
+Player::getItemClassCount(Player or Client, ClassName) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+ClassName: The name of the class. Example: Weapon
+USED IN: Item.cs, Station.cs 
+RETURN: Number. The number of Items of type ClassName found. If failed then 0 
+Used to find the number of Items of that ClassName the Player or Client currently has.  
+
+Player::mountItem(Player or Client, Item, ImageSlot) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Item: The data block name of the item. Example: Chaingun 
+ImageSlot: There are four slots: $WeaponSlot==0, $BackpackSlot==1, 
+               $FlagSlot==2, $DefaultSlot==3.
+USED IN: Item.cs, Objectives.cs 
+RETURN: True if succeed or False if failed. 
+Used to mount an Item to the defined slot. Example: When you press a number key to switch weapons you are mounting that new weapon in the WeaponSlo.  
+
+Player::unmountItem(Player or Client, ImageSlott) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+ImageSlot: There are four slots: $WeaponSlot==0, $BackpackSlot==1, 
+               $FlagSlot==2, $DefaultSlot==3. 
+USED IN: Item.cs, Vehicle.cs 
+RETURN: True if succeed or False if failed. 
+Used to unmount an Item from the ImageSlot. Example: When you pilot a vehicle your weapon is unmounted.  
+
+Player::getMountedItem(Player or Client, ImageSlot) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+ImageSlot: There are four slots: $WeaponSlot==0, $BackpackSlot==1, 
+               $FlagSlot==2, $DefaultSlot==3. 
+USED IN: BaseProjData.cs, Item.cs, Objectives.cs, Player.cs, ... 
+RETURN: Item. The data block name of the item. Example: Chaingun. If failed then -1. 
+Used to find out what Item is mounted in the ImageSlot.  
+
+Player::getNextMountedItem(Player or Client, ImageSlot) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+ImageSlot: There are four slots: $WeaponSlot==0, $BackpackSlot==1, 
+               $FlagSlot==2, $DefaultSlot==3. 
+USED IN: Item.cs 
+RETURN: Item. The data block name of the item. Example: Chaingun. If failed then -1.  
+Used to get the next available Item to be mounted in the ImageSlot. The Items are only once that the Player has in there inventory.  
+
+Player::useItem(Player or Client, Item) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Item: The data block name of the item. Example: Chaingun 
+USED IN: Dm.cs, Game.cs, Item.cs, Vehicle.cs 
+RETURN: True if succeed or False if failed. 
+Used to mount the Item in it proper ImageSlot.  
+
+Player::dropItem(Player or Client, Item) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Item: The data block name of the item. Example: Chaingun
+USED IN: Item.cs, Objectives.cs, Player.cs 
+RETURN: True if succeed or False if failed. 
+Used to drop the Player or Clients Item.  
+
+Player::deployItem(Player or Client, Item) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Item: The data block name of the item. Example: Chaingun 
+USED IN: Item.cs 
+RETURN: True if succeed or False if failed 
+Used to deploy the Player or Clients Item.  
+
+Player::setMountObject(Player or Client, Object, MPoint) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Object: The object Id. Example: 8643. 
+MPoint: Mount Point. Where on the object to mount. 
+USED IN: Player.cs, Turret.cs, Vehicle.cs 
+RETURN: True if succeed or False if failed. 
+Used to mount a Player on an Object at the MPoint. 
+          Example: Mounting Players to vehicles. The 0 MPoint on 
+          a vehicle is the pilot mount point. The HPC and LPC 
+          have additional MPoints for each passenger.  
+
+Player::getMountObject(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Player.cs 
+RETURN: Object. The object id that the Player is mounted to. If failed then -1 or False. 
+Used to get the Object that the Player or Client is mounted to.  
+
+Player::trigger(Player or Client, ImageSlot, <Bool>) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+ImageSlot: There are four slots: $WeaponSlot==0, $BackpackSlot==1, 
+               $FlagSlot==2, $DefaultSlot==3. 
+Bool: True if it is triggered. False if not. If no Bool is passed in then it is set to triggered. 
+USED IN: BaseProjData.cs, Item.cs, 
+RETURN: True if succeed or False if failed. 
+Used to set Items as triggered. This will allow you to call the function isTriggered() to see if the Item is triggered.  
+
+Player::isTriggered(Player or Client, ImageSlot) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+ImageSlot: There are four slots: $WeaponSlot==0, $BackpackSlot==1, 
+               $FlagSlot==2, $DefaultSlot==3. 
+USED IN: BaseProjData.cs, Player.cs 
+RETURN: True if the Item is triggered or False if failed or not triggered. 
+Used to see if the Item in the ImageSlot is triggered. Firing a weapon is one way to trigger an Item or in the case of the energy pack when mounted is always triggered.  
+
+Player::setSensorSupression(Player or Client, Value) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Value: The radius to suppress in meters. 
+USED IN: Item.cs 
+RETURN: True if succeed or False if failed. 
+Used to associate a radius with an Player so that nothing with in that radius will appear on an enemies sensor network.  
+
+Player::getSensorSupression(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Item.cs 
+RETURN: Number. The radius. If failed then 0. 
+Used to get the radius previously defined by 
+          Player::setSensorSupression.  
+
+Player::isDead(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Admin.cs, Dm.cs, Moveable.cs, Player.cs, Item.cs, ... 
+RETURN: True if player is dead else False. 
+Used to determine if the Player or Client is dead.  
+
+Player::applyImpulse(Player or Client, Vector) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Vector: The direction and force. 
+USED IN: Player.cs, Vehicle.cs 
+RETURN: False. 
+Used to apply the Vector to the Player object. This will cause the player to be forced in the direction defined by Vector.  
+
+Player::kill(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Admin.cs, Player.cs, Observer.cs 
+RETURN: True if succeed or False if failed. 
+Used to set the player as killed and will also call the 
+          Player::onKilled function.  
+
+Player::getDamageFlash(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Player.cs 
+RETURN: Flash. The flash is a value in the range 0-1. If failed then 0. 
+Used to get the current degree of flash.  The flash is used to give the screen a reddish tint when a Player or Client is harmed.  
+
+Player::setDamageFlash(Player or Client, Value) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Value: The value of the flash in the range 0-1. 
+USED IN: Dm.cs, Player.cs 
+RETURN: True if succeed or False if failed 
+Used to set the current degree of flash.  The flash is used to give the screen a reddish tint when a Player or Client is harmed.  
+
+Player::setArmor(Player or Client, Armor) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Armor: Type of armor. There are five armor types: larmor, marmor, harmor, lfemale, mfemale. 
+USED IN: Game.cs, Item.cs 
+RETURN: True if succeed or False if failed. 
+Used to set the Player or Clients armor type.  
+
+Player::isExposed(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049
+USED IN: Player.cs 
+RETURN: True if Exposed otherwise False if not Exposed or failed.  
+Used to see if a player can be damaged by a projectile. Was written for vehicles that once a Player was inside they where protected and  couldn't be harmed. This is not supported and will always return True.  
+
+Player::isJetting(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049.
+USED IN: Ai.cs 
+RETURN: True if jetting otherwise False if not jetting or failed.  
+Used to see if a Player or Client is jetting.  
+
+Player::lastJetTime(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Player.cs 
+RETURN: Ticks. The Current number of ticks. These Ticks are incremented 1024 times per second until you exit Tribes. So shifting your value to the right 10 times will give you seconds. If failed then 0.  
+Used to get what time the player jetted last.  
+
+Player::blowUp(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Player.cs 
+RETURN: True.  
+Used to blowUp the Player or Client when he dies. Blowing up animation will only be played when the player dies.  
+
+Player::getLastContactCount(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Player.cs 
+RETURN: Number. Ticks the player was in the air. 
+Used to find out the number of ticks the Player or Client has been in the air.  
+
+Player::isCrouching(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049.
+USED IN: Player.cs 
+RETURN: True if Crouching, False if not Crouching, or -1 if failed.  
+Used to see if the Player or Client is crouching.  
+
+Player::isAiControlled(Player or Client) 
+ 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Objectives.cs, Station.cs, Vehicle.cs 
+RETURN: True if succeed or False if failed.  
+Used to find out if a Player or Client is an AI.  
+
+ListPlayers() 
+ 
+USED IN: Console screen command. 
+RETURN: Displays it to the console screen.  
+Will list all players name and Id currently on the server.  
+
+
+  

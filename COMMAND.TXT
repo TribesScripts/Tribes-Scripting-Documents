@@ -1,0 +1,66 @@
+COMMAND FUNCTIONS 
+ Updated 04/05/99  
+
+addCMCommand(Object, MenuStr, Command,<Arg>) 
+Object: The menu object. 
+MenuStr: Text to be added to the menu. The first letter of this text string determines what key to press to activate this command. 
+Command: Function to call for example "say". 
+<Arg>: Any agruments that need to be passed the the Command. 
+USED IN: Chatmenu.cs, Menu.cs 
+RETURN: 0. 
+Used to add commands to the menu Object. 
+
+IssueCommand(Commander, Player, Icon, Msg, MapX, MapY) 
+Commander: The Client Id of the commander. 
+Player: The Client Id of the player receiving the command. 
+Icon: Waypoint Icon to be displayed on the map. 
+       0: No waypoint Icon will be displayed. 
+       1: Attack Icon will be displayed. 
+       2: (Defend, Repair, Deploy) Icon will be displayed. 
+Msg: Message to be displayed. 
+MapX: The X value of the Waypoint location. In Map coordinates where the center of map is at location (0,0). 
+MapY: The Y value of the Waypoint location.  In Map coordinates where the center of map is at location (0,0). 
+USED IN: Comchat.cs, Objectives.cs 
+RETURN: 0. 
+Used to issue a command to player which gives them a waypoint at the location (MapX,MapY) on the map. IssueCommand will convert 
+the Map coordinates to World coordinates.  
+
+IssueCommandI(Commander, Player, Icon, Msg, WorldX, WorldY) 
+Commander: The Client Id of the commander. 
+Player: The Client Id of the player receiving the command. 
+Icon: Waypoint Icon to be displayed on the map. 
+       0: No waypoint Icon will be displayed. 
+       1: Attack Icon will be displayed. 
+       2: (Defend, Repair, Deploy) Icon will be displayed. 
+Msg: Message to be displayed. 
+WorldX: The X value of the Waypoint location. In World coordinates where the X value is in the range 0-1023. 
+WorldY: The Y value of the Waypoint location.  In World coordinates where the Y value is in the range 0-1023. 
+USED IN: Comchat.cs 
+RETURN: 0.  
+Used to issue a command to player which gives them a waypoint at the location (WorldX,WorldY) on the map.  
+
+IssueTargCommand(Commander, Player, Icon, Msg, Target) 
+Commander: The Client Id of the commander. 
+Player: The Client Id of the player reciveing the command. 
+Icon: Waypoint Icon to be displayed on the map. 
+Msg: Message to be displayed. 
+Target: Is the object to perform the specified action on. 
+USED IN: Comchat.cs 
+RETURN: 0. 
+Used to give a Player a command to do an action on the Target. It will use the Targets coordinates to set the Players waypoint.  
+
+SetCommandStatus(Client, Status, Message) 
+Client: The Client Id. Example: 2049. 
+Status: Current status of the command. 
+       0: Set to 0 if failed, declined, or completed. 
+       1: Set to 1 if acknowledged. 
+Message: Command Message. 
+USED IN: Comchat.cs, Objectives.cs 
+RETURN: True if status changed or False if no change or failed.  
+Used to set the status for the given command. If no status was changed then it will return False.  
+
+  
+
+
+  
+  

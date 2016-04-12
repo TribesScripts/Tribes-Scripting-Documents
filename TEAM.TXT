@@ -1,0 +1,45 @@
+Team Functions 
+ Updated 04/09/99 
+
+Team::setScore(TeamId, ScoreString, SortValue) 
+TeamId: Team number.  Each team is associated with a number 
+            range from -1 to 7.  Where -1 is the observer team. 
+ScoreString: The string that will be displayed. 
+SortValue: The value ScoreStrings will be sorted by.
+USED IN: Objectives.cs 
+RETURN: True if succeed or False if failed.  
+Used to set the team score values on the TAB screen. Look at the function ObjectiveMission::refreshTeamScores() in the Objectives.cs file.  I'll explain this function below:
+          Team::setScore(%i, "%t\t " @ $teamScore[%i], $teamScore[%i]); 
+          %i is the TeamNumber.  The "%t\t ": %t will print the teams 
+          name and the \t will tab over to the next column (which is 
+          defined in the setTeamScoreHeading function call).  The 
+          $teamScore[%i] is the %i teams score and the last 
+          $teamScore[%i] says that you want it to be sorted by 
+          team score.  Sorts highest value on top lowest on the bottom. 
+
+setTeamScoreHeading(HString) 
+HString: The heading for the team scores on the tab screen. 
+USED IN: Dm.cs, Objectives.cs 
+RETURN: True if succeed or False if failed.  
+Sets the heading for the team score section of the tab screen. For Example: 
+          setTeamScoreHeading("Team Name\t\xD6Score"); 
+          It will print Team Name and then move D6hex units 
+          to the right and print Score.  The D6 is a hex value from 
+          0 to FF.. 
+
+Team::setObjective(TeamId, LineNum, String) 
+TeamId: Team number.  Each team is associated with a number range from -1 to 7.  Where -1 is the observer team. 
+LineNum: The line number to display the text on. 
+String: The text string to be displayed.
+USED IN: Dm.cs, Objectives.cs 
+RETURN: 0  
+Used to place text on the objective screen.  Each objective screen is team based. This allows you to have a different objective screen for each team.  It uses the TeamId to define on which objective screen to place the text. 
+
+Team::clearObjectives(TeamId) 
+TeamId: Team number.  Each team is associated with a number range from -1 to 7.  Where -1 is the observer team.
+USED IN: Currently not used in any script files. 
+RETURN: 0  
+This will clear the objective screen for the team defined by the TeamId. 
+
+
+  

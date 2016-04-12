@@ -1,0 +1,78 @@
+Network Server Functions 
+ Updated 04/09/99 
+
+addGameServer(Address, Name, Version, Ping, Favorite<TRUE OR FALSE>) 
+Address: IP address of server. 
+Name: Name of the server. 
+Version: The version number the server is running. 
+Ping: The ping from the server. 
+Favorite: Do you want it marked as a favorite <TRUE OR FALSE>.
+USED IN: GUI.cs 
+RETURN: TRUE if succeed or FALSE if failed. 
+Used to manually add a server to your server list.  
+
+DNet::resolveMasters(SName0,<SName1, ..., SName9) 
+SName0: Name of the first server. 
+            Example: tlm1.master.dynamix.com:28000 
+SName1: Name of the second server. and so on... 
+USED IN: GUI.cs 
+RETURN: Number. The number of master servers.  
+Used to convert the server names into IP address. The IP address are stored and can be accessed by using the DNet::getResolvedMaster function.  
+
+DNet::getResolvedMaster(Index) 
+Index: Refers to a location in the IP address list. 
+USED IN: GUI.cs 
+RETURN: IP address. Example: IP:209.67.28.148:28000. If failed then "".  
+Used to get the IP address at the location pointed to by Index from the master server list.  
+
+StartGhosting(Client) 
+Client: The Client Id. Example: 2049.
+USED IN: Server.cs 
+RETURN: True if succeed False if failed. 
+Used to start sending object data to the clients.  Ghosting is used to send the objects from the server over to the clients computer.  
+
+ResetPlayerManager() 
+USED IN: Server.cs 
+RETURN: True. 
+Used to clear out all players and reset the Player Manager.  
+
+ResetGhostManagers() 
+USED IN: Server.cs 
+RETURN: True. 
+Used to clear out all object and reset the Ghost Manager.  
+
+focusClient() 
+USED IN: Editor.cs, NewMission.cs, registerVolume.cs, Server.cs, Trees.cs 
+RETURN: True. 
+Used to make all the function calls on the Client side. Also uses the Client manager when adding or removing an object.  
+
+focusServer() 
+USED IN: Editor.cs, NewMission.cs, RegisterVolume.cs, Server.cs, Trees.cs 
+RETURN: True if succeed or False if failed. 
+Used to make all the function calls on the Server side. Also uses the Server manager when adding or removing an object.  
+
+newServer() 
+USED IN: NewMission.cs, Server.cs 
+RETURN: True. 
+Used to create a new server and add it to the server list.  
+
+deleteServer() 
+USED IN: Editor.cs, GUI.cs, NewMission.cs, Server.cs 
+RETURN: True. 
+Used to remove the current server from the server list.  
+
+preloadServerDataBlocks() 
+USED IN: NewMission.cs, Server.cs 
+RETURN: True if succeed False if failed. 
+Used to load all the Data Blocks that are defined in the scripts.  Must be called after the scripts have been loaded in.  
+
+purgeResources() 
+USED IN: Client.cs, Editor.cs, GUI.cs, Server.cs, NewMission.cs, ... 
+RETURN: True. 
+Used to clear out files or other resources that are not needed in memory anymore.  
+
+
+  
+  
+
+  

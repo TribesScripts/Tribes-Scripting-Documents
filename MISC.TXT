@@ -1,0 +1,103 @@
+Miscellaneous Functions 
+ Updated 04/09/99 
+
+schedule(Statement, Time, <Object>) 
+Statement: Action to perform. Could be a function call or a simple 
+               x=y statement. 
+Time: In seconds. 
+Object: If object is deleted then cancel the schedule. 
+USED IN: Client.cs, Dm.cs, Game.cs, Item.cs, Moveable.cs, Server.cs, ... 
+RETURN: Time. The time when the statement will get called. False if failed.  
+Used to perform the Statement Time seconds in the future. 
+
+remoteEval(Client, Function, <Arg>) 
+Client: The Id of the Client to run the function. 
+Function: The function name. 
+Arg: Any arguments that need to be passed to the function. 
+USED IN: Admin.cs, Client.cs, Game.cs, GUI.cs, Menu.cs, Server.cs 
+RETURN: True.  
+Used to call a function on a specific client. The function must be defined like so: function remoteNextWeapon();. When you the function you will pass in only NextWeapon for the name not remoteNextWeapon. 
+
+WaypointToWorld(Waypoint) 
+Waypoint: Is an (x,y) location on the map. 
+USED IN: Ai.cs 
+RETURN: World location. Example: "342 345 0". The Z is always 0. If failed then "0 0 0".  
+Converts a waypoint location into a world location.  World locations are given in the range (0-1023, 0-1023);  
+
+RenderCanvas(Canvas) 
+Canvas: The desired canvas to render. Example: MainWindow 
+USED IN: Client.cs, GUI.cs, Server.cs 
+RETURN: 0  
+Used to force a redraw of the entire canvas.  
+
+rebuildCommandMap() 
+USED IN: Client.cs 
+RETURN: True if succeed or False if failed 
+Used to take a picture of the mission area for the command map and then retile the command map.  
+
+Projectile::spawnProjectile(Object, Trans, ShootId, ShootVel, <TargetObj>) 
+Object: The projectile data block name to be spawned. Look in 
+            BaseProjData.cs for projectile names. 
+Trans: The transform of the shooters weapon. 
+ShootId: The Id of the shooter. Example: 8361. 
+ShootVel: The velocity of the shooter. 
+TargetObj: An object for the projectile lock-on and target. 
+USED IN: Currently not used in any script files. 
+RETURN: True if succeed or -1 if failed.  
+Used to spawn a projectile. 
+       For Example: 
+             Trans = GameBase::getMuzzleTransform(Player Id); 
+             ShootVel = Item::getVelocity(Player Id); 
+             Projectile::spawnProjectile("DiscShell", Trans, ShootId, 
+                                          ShootVel);  
+
+GUI::isIn8BitMode() 
+USED IN: Options.cs 
+RETURN: True if it is in 8 bit mode. False if not 8 bit or if it failed 
+Used to check if windows is in 8 bit mode.  
+
+GUI::issue8BitWarning() 
+USED IN: Options.cs 
+RETURN: True. 
+Used to send a warning to the user that the game can't be run in 256 color mode. 
+          The warning message: 
+             "Your display is in 8-Bit (256 color) Mode. Tribes 
+              may not display correctly in Windowed mode unless 
+              the display resolution is changed to 16-bit (65536 
+              color) mode or above.  Fullscreen display will display 
+              properly however."  
+
+GUI::issueInternetWarning() 
+USED IN: Currently not used in any script files. 
+RETURN: True.  
+Used to warn the user of possible problems because an active internet connection could not be detected. 
+          The warning message: 
+             "Starsiege TRIBES requires an active internet connection 
+              to function properly.  If you are not connected to your 
+              Internet Service Provider, you may experience pauses when 
+              Windows attempts to automatically connect your computer to 
+              the Internet." 
+
+postAction(Object, Action, Value) 
+Object: Object to have the Action performed on. 
+Action: The action. 
+Value: Value of the Action.
+USED IN: EditMission.cs, Editor.cs 
+RETURN: True if succeed or False if failed. 
+Used to push an Action on to the stack.  
+
+focus(Object) 
+Object: Object that will receive a message that it has gained focus.
+USED IN: EditMission.cs, Editor.cs, NewMission.cs 
+RETURN: True if succeed or False if failed.  
+Used to set that Object to receive all input from devices. Example of devices are mouse and keyboard.  
+
+unfocus(Object) 
+Object: Object that will receive a message that it has lost focus.
+USED IN: EditMission.cs, Editor.cs 
+RETURN: True if succeed or False if failed.  
+Used to stop sending input data to the object and clear any remaining input information for that object.  
+
+  
+
+  

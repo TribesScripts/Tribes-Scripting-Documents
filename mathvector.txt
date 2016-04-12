@@ -1,0 +1,90 @@
+Math and Vector Functions 
+ Updated 04/09/99 
+
+Vector::dot(Vector1, Vector2) 
+Vector1: Is a Vector that has an X, Y and Z value."100 32 3" 
+Vector2: Is a Vector that has an X, Y and Z value."34 77 45" 
+USED IN: Item.cs 
+RETURN: Float. The dot product. If failed then 0.  
+Will perform the dot product on the two vectors.  
+
+Vector::add(Vector1, Vector2) 
+Vector1: Is a Vector that has an X, Y and Z value."100 32 3" 
+Vector2: Is a Vector that has an X, Y and Z value."34 77 45" 
+USED IN: Currently not used in any script files. 
+RETURN: Vector. Example: "134 169 48". If failed then "0 0 0".  
+Will add the two vectors together.  
+
+Vector::sub(Vector1, Vector2) 
+Vector1: Is a Vector that has an X, Y and Z value."100 32 3" 
+Vector2: Is a Vector that has an X, Y and Z value."34 77 45"
+USED IN: Currently not used in any script files. 
+RETURN: Vector. Example: "66 -45 -42". If failed then "0 0 0". 
+Will subtract the two vectors.  
+
+Vector::neg(Vector) 
+Vector: Is a Vector that has an X, Y and Z value."100 32 3" 
+USED IN: Currently not used in any script files. 
+RETURN: Vector. Example: "-56 -34 -23". If failed then "0 0 0"  
+Will make the Vector values all negative. 
+          For example: 
+             Vector = "56 34 23"; 
+             Answer = Vector::neg(Vector); 
+             Answer is equal to "-56 -34 -23".  
+
+Vector::getFromRot(Rotation, [Length, Zvalue]) 
+Rotation: Rotation of an object. 
+Length: Length of desired vector. 
+Zvalue: Will increase the vector in the Z direction. 
+USED IN: Ai.cs, Item.cs, Vehicle.cs 
+RETURN: Vector. Example: "394 44 43". If failed then "0 0 0". 
+Is used to create a vector in the direction of the rotation passed in. If no length is passed then the vector will be the unit length. This is most commonly used to get a vector in the direction an object is facing. 
+          For example: 
+             Rotation = GameBase::GetRotation(Player); 
+             Length = 50; Zvalue = 60; 
+             Vector = Vector::getFromRot(Rotation, Length, Zvalue); 
+             Vector is equal to a vector facing in the direction the 
+             player was at an upward angle.  The upward angle is due 
+             to the Zvalue passed in.  Now you can us a function called 
+             Player::applyImpulse(Player, Vector); This will force the 
+             player forward at a force of Length and up in the air a force 
+             of Zvalue .  
+
+Vector::getDistance(Vector1 or Pos, Vector2 or Pos) 
+Vector1: Is a Vector that has an X, Y and Z value."100 32 3" 
+Vector2: Is a Vector that has an X, Y and Z value."34 77 45" 
+Pos: Position. Is an X, Y, Z point. "28 25 99". 
+USED IN: Ai.cs, Objectives.cs 
+RETURN: Float. Distance. If failed then 0. 
+Is used to find the distance between two vectors or points .  
+
+Vector::getRotation(NVector) 
+NVector: Normalized vector. Example: "1 0 -1" 
+USED IN: Item.cs 
+RETURN: Rotation in radians. Example: "-1.5 0 3.14". 
+Used to get a rotation from a normalized vector .  
+
+Vector::normalize(Vector) 
+Vector: Is a Vector that has an X, Y and Z value."100 32 3"
+USED IN: Staticshape.cs 
+RETURN: Vector. Normalized Vector. If failed then "0 0 0".  
+Will normalize the vector passed in .  
+
+sqrt(Value) 
+Value is a non negative number.
+USED IN: Vehicle.cs 
+RETURN: Float. The square root of the input value. If failed then -1.  
+Used to take the square root of the value passed in .  
+
+pow(Value, Power) 
+Value: Integer. 
+Power: Integer. 
+USED IN: Currently not used in any script files. 
+RETURN: Float. If failed then -1. 
+Will raise the Value to the given Power.  
+
+
+  
+  
+
+  

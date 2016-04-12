@@ -1,0 +1,93 @@
+ SERVER CORPS - BASIC ADMINISTRATION 
+
+    Hardware Requirements 
+    Basic Config File 
+    Starting the Server 
+    Remote Administration Using the Client 
+  
+
+Hardware Requirements 
+
+This is basically a rough guide to give you an idea of how many players your machine will be able to support running a dedicated server.  "Listen" servers impose a much greater CPU load on your host machine, a rough guide for Listen servers would be to divide the number of players in the CPU table by two. The memory requirements are pretty straight forward, any dedicated server should have mnimum of 48 Megs of RAM for any number of players.  The following table gives a rough idea of player counts based on CPU speed: 
+  CPU Speed Number of Players 
+166 16 
+200 20 
+266 24 
+333 32 
+400 32 
+
+
+Exceeding the player limit for your hardware can overload your machine (your CPU load will reach %100).  When this happens, your machine is no longer able to keep up with the game.  The players connected to your server will experience this as a form of "lag", which reduces the performance of the game.  If players on your server are often complaining of lag, then you may be overloading your system. 
+
+TRIBES has an internal limit of 128 players, but we don't recommend that you exceed 32, even if your server can handle it.  The more players you allow on you server, the more load you are also placing on the clients, who need to process and render all players visible to them.  Clients with lower end processors will not be able to play effectively on games with player counts of over 32. 
+
+Your Internet upstream & downstream rate also have a big impact on lag.  If your Internet bandwidth is not sufficient to support the number of player in the game, the players will experience this as lag.  Using the default $pref::packetRate and $pref::packetSize settings (mentioned below in the Basic Config File, and covered in more detail in the Advanced Administration page) each client to your server will consume 16Kbps.  Some Internet connections do not have equal upload and download rates, use the smaller number in this table: 
+  Internet Connection Rate (Kbps) Number of Players 
+28.8 1 
+56 3 
+128 (ISDN) 8 
+256 16 
+300 (Upload rate for some Cable Modems) 16 
+1500 (T1) 32 
+
+
+All the player numbers are basically the connection rate in Kbps divided by 16. This table does not include the host, so if you are running a listen server on a 56Kbps modem, you could have a 4 player game (3 over the Internet plus yourself).  Bandwidth issues are covered in a little more detail on the a Advanced Administration page under Bandwidth. 
+
+Again, these are just rough numbers to get you started, check your CPU load, the responsivness of the game, reports of lagginess etc. and adjust your player count accordingly. 
+
+Basic Config File 
+
+The server config file consists of a plain text file placed in the tribes\config directory that is used to initialize a number of TRIBES console environment variables. The config file is executed after all the basic TRIBES initialization and will override the default variables declared in the serverPrefs.cs and clientPrefs.cs files also located in the tribes\config directory. The example config file given here declares the basic variables needed to get a dedicated server up and running. You can edit the values directly in the serverPrefs.cs and clientPrefs.cs files, but these files are also shared by the client, and if you are running the client and a dedicated server from the same directory, you should definitely make a separate config  file. 
+
+Save the Basic Config text file into a file called serverConfig.cs in your tribes\config directory.  Make sure to edit the Server::Hostname, Server::Info and AdminPassword fields. 
+CLICK HERE FOR basic serverConfig.cs file 
+  $Server::HostName This is the name of your host (String) 
+$Server::MaxPlayers Maximum number of players on at one time (Int) 
+$Server::Info Information displayed about the server in the Game Info screen. Should contain the name and email of the server admin. (String) 
+$Server::JoinMOTD Message Of the Day displayed for new clients (String) 
+$Server::HostPublicGame Register this game with the master server (Bool) 
+$Server::Port The port address to used to communicate with clients (Int) 
+$Server::TimeLimit The time limit for a mission in minutes (Int) 
+$Server::Password Password required to connect to the server (String) 
+$AdminPassword Password to use in conjunction with SAD(password); to obtain admin rights. (String) 
+$pref::PacketRate Max packets/sec per client. We recommend setting this to 10. (Int)  
+$pref::PacketSize Max packet size per client. We recommend setting this to 200. (Int) 
+
+
+Starting The Server 
+
+Once your config file is all setup, start the server as follows: open a DOS box, cd into the TRIBES root directory and type the following (assuming your server config file is called serverConfig.cs): 
+
+    infiniteSpawn *tribes +exec serverConfig -dedicated 
+
+The infiniteSpawn program will automatically restart the TRIBES server should it exit prematurely. The * in front of the tribes executable name is an option to display restart and uptime information. Shut the server down by pressing the Quit button on the infiniteSpawn window.  TRIBES can be run without infiniteSpawn program, by simply typing from the TRIBES root directory: 
+
+    tribes +exec serverConfig -dedicated 
+
+If you are running more that a single dedicated server from the same directory, you can create a config file for each one, server1.cs, server2.cs etc., where each config file sets a different $Server::Port address (28001,28002, etc.)  Start them all going: 
+
+    infiniteSpawn *tribes +exec server1 -dedicated 
+    infiniteSpawn *tribes +exec server2 -dedicated 
+    ... 
+
+Remote Administration Using the Client 
+
+Remote administration of a server is basically handled in two ways, either from a client (while playing the game) using the admin functions available on the server menu, or by connecting directly to a server. You can access the server directly by accessing it's dos box, or through a server's telnet port. Administrating using telnet is the same as operating from the server's DOS box, both are little more complicated than using the client, but do give you full access to the server (see Remote Administration using Telnet & Dos Window Administration). Administrating from the client only provides a minimal set of functions, kicking, changing missions, etc., but is easier to do, almost all of it is done through the server menu. Using the client, you must first get admin privileges by either being voted admin, or by knowing the server's admin password.  Admin yourself with the password by using the SAD command from the console: 
+
+    SAD("password"); 
+
+See the Basic Config File on setting an admin password. Note that if you are connected to a game you are hosting (i.e., not running a dedicated server), you automatically have admin rights. Once you are an admin, the server menu will appear slightly different.  Whereas non-admin clients see options such as "vote to change mission", if you have admim rights, the menu will simply say "change mission".  No vote will be called, and the action will take place immediately. 
+
+There are a few console commands witch require arguments and are therefor not in the server menu.  These functions are client side scripts that effect changes on the server: 
+  SAD("password"); Give yourself admin rights. 
+SADSetPassword("password"); Set the server password (not the admin password) 
+ADSetTimeLimit(time); Set the mission time limit 
+ADSetTeamInfo(team#,"teamName",skinBase); Set team information. Team#=0-n (Int), teamName is the name displayed on the score menu and in the objectives, (String), skinBase is the skin set base name, such as beagle or dsword. (String) 
+
+ 
+
+ 
+ 
+
+
+ 

@@ -1,0 +1,52 @@
+Item Functions 
+ Updated 04/09/99 
+
+
+Item::getItemData(ItemObj) 
+ItemObj: The object Id of the Item. Example: 8361.
+USED IN: Item.cs, Objectives.cs 
+RETURN: Items data block name.  
+Used to get the ItemObj data block name. Example: If you pickup a spinning repairpack that repairpack is an object. That object is an Item object.  So to get the Items data block name you call this function. 
+
+
+
+Item::setVelocity(ItemObj, Vec) 
+ItemObj: The object Id of the Item. Example: 8361. 
+Vec: The velocity vector. Example: "0 45 44". 
+USED IN: Objectives.cs 
+RETURN: True if succeed or False if failed.  
+Used to set the velocity of an ItemObj. 
+
+
+
+Item::getVelocity(ItemObj) 
+ItemObj: The object Id of the Item. Example: 8361. 
+USED IN: Currently not used in any script files. 
+RETURN: Velocity Vector. Example: "33 2 8". If failed then "0 0 0".  
+Used to get the velocity of an ItemObj. 
+
+
+
+Item::getCount(ItemObj) 
+ItemObj: The object Id of the Item. Example: 8361. 
+USED IN: Item.cs 
+RETURN: Number. The number of Items associated with the ItemObj.  
+Used to get the number of Items associated with that ItemObj. Example: Player picks up a box of chaingun ammo, then the function would return 25(which is the number of bullets in the box). 
+
+
+
+Item::isRotating(ItemObj) 
+ItemObj: The object Id of the Item. Example: 8361. 
+USED IN: Item.cs 
+RETURN: True if rotating and False if not rotating or failed.  
+Used to see if the ItemObj is Rotating or is set to rotate. 
+
+
+
+Item::hide(ItemObj, Bool) 
+ItemObj: The object Id of the Item. Example: 8361. 
+Bool: If True then hide ItemObj if False then unhide ItemObj.
+USED IN: Item.cs, Objectives.cs 
+RETURN: True if succeed or False if failed.  
+Used to make on ItemObj hidden if True is passed in or visible if False is passed in. 
+

@@ -1,0 +1,195 @@
+ Call back
+
+Call back functions are functions that are called from within code when an event happens. This allows the scripting language to handle different events in their own way. Click on the below categories to link to the corresponding section. Each section is arranged by Argument and Description. The last section of each document is the description of that function
+
+Scripting Index Game Base Moveable Player 
+Shape Base Static Base Trigger Vehicle 
+
+  
+
+  GameBase  DERIVED FROM: SimMovement 
+ 
+
+onAdd(This) 
+This: The object being added.  
+When an object gets created and placed in the mission. Example: When you buy a flier or drop ammo those create an object and onAdd is then called.  
+
+onInit(This) 
+This: The object that is being initialized.  
+EXPLAIN: When objects are being read in from the mission script.  
+
+onRemove(This) 
+This: The object that was removed.  
+When an object is removed from the mission.  
+
+onCollision(This, Object) 
+This: The object being hit.
+Object: The object doing the colliding. 
+ 
+When a collision occurs with another object. 
+
+
+ 
+
+Moveable DERIVED FROM: StaticBase 
+ 
+
+onFirst(This) 
+This: The object on the first waypoint. 
+When the object reaches the first waypoint in the waypoint list.  
+
+onLast(This) 
+This: The object on the last waypoint. 
+When the object reaches the last waypoint in the waypoint list.  
+
+onWaypoint(This) 
+This: The object on the waypoint. 
+When the object hits each waypoint in the waypoint list.  
+
+onBlocker(This, Object) 
+This: The object being blocked.
+Object: The object doing the blocking.  
+When an object is blocking the moveable object. 
+
+onNewPath(This) 
+This: The object.  
+When the waypoint list gets created.  
+
+ 
+
+Player  DERIVED FROM: ShapeBase 
+ 
+
+onKilled(This) 
+This: The player object that died 
+When the player dies. 
+
+onUse(Player, Item) 
+Player: The Player object using the Item.
+Item: The Item to be used.  
+When a Player uses an Item. 
+
+onDrop(Player, Item) 
+Player: The Player object dropping the Item. 
+Item: The Item to be dropped  
+When a Player drops an Item.  
+
+onDeploy(Player, Item, Pos) 
+Player: The Player object deploying the Item.
+Item: The Item to be deployed.
+Pos: This position is invalid and should not be used.  
+When a Player deploys an Item. 
+
+onMount(Player, Item) 
+Player: The Player mounting the Item.
+Item: The Item being mounted. 
+When a Player mounts an Item to one of it slots. 
+
+onUnmount(Player, Item) 
+Player: The Player unMounting the Item.
+Item: The Item being unMounted.  
+When a Player unMounts an Item from one of its slots.  
+
+onNoAmmo(Player, ImageSlot, ItemType) 
+Player: The Player out of ammo.
+ImageSlot: The slot the out ammo weapon is located.
+ItemType: The Item Type that is out of ammo. Example: 13 
+When a Player runs out of ammo for the weapon currently being used.  
+
+onActivate(This) 
+This: The object that was activated. 
+When an object becomes active. Example: A Player turns on a Sensor Jammer pack or Shield pack.  
+
+onDeactivate(This) 
+This: The object that was deactivated.  
+When an object becomes deactivated. Example: A Player turns off a Sensor Jammer pack or Shield pack. 
+
+onFire(This, Slot) 
+This: The object that fired the projectile.
+Slot: The slot that the weapon that fired was in.  
+When a projectile is unknown it will allow the scripts to handle the firing of the projectile. Example: if the disc for the disc launcher is unknown then it will call the function DiscLauncherImage::onFire();.  
+
+ 
+
+Shapebase  DERIVED FROM: GameBase 
+ 
+
+onEndSequence(This, Thread) 
+This: The object that the sequence was run on.
+Thread: The thread the sequence was setup on. 
+When a sequence is finished running on an object.  
+
+ 
+
+StaticBase  DERIVED FROM: ShapeBase 
+ 
+
+onActivate(This) 
+This: The object that is now active.  
+When an object becomes active. GameBase::setActive(obj, True) will set an object to be active.  
+
+onDeactivate(This) 
+This: The object that is now deactivated.  
+When an object becomes inactive. GameBase::setActive(obj, False) will set an object to be inactive.  
+
+onNone(This) 
+This: The object whose state is unknown.  
+When an object is not Enabled, Disabled, or Destroyed then its state is set to None. 
+
+onEnabled(This) 
+This: The object that is enabled.  
+When the object's state has changed to Enabled.  
+
+onDisabled(This) 
+This: The object that is disabled.  
+When the object's state has changed to Disabled.  
+
+onDestroyed(This) 
+This: The object that is destroyed.  
+When the object's state has changed to Destroyed.  
+
+onPower(This, State, Generator) 
+This: The object whose power state has changed.
+State: The new state of the power.
+Generator: The generator that caused the state change. 
+When the object's power state has changed because the Generators state has changed to Enabled, Disabled, or Destroyed. 
+
+ 
+
+Trigger DERIVED FROM: GameBase 
+ 
+
+onEnter(This, Object) 
+This: The trigger object.
+Object: The object that hit the trigger.  
+When an object collides with a trigger.  
+
+onContact(This, Object) 
+This: The trigger object.
+Object: The object that is contacting the trigger.  
+When an object is standing on a trigger. Will get called every second until the object is no longer in contact with the trigger.  
+
+onLeave(This, Object) 
+This: The trigger object.
+Object: The object that is no longer contacting the trigger.  
+When an object is no longer in contact with the trigger. 
+
+onActivate(This) 
+This: The object that is now active.  
+When an object becomes active. GameBase::setActive(obj, True) will set an object to be active.  
+
+onDeactivate(This) 
+This: The object that is now deactivated.  
+When an object becomes inactive. GameBase::setActive(obj, False) will set an object to be inactive.  
+
+ 
+
+Vehicle  DERIVED FROM: StaticBase 
+ 
+
+onFire(This, Slot) 
+This: The object that fired the projectile.
+Slot: The slot that the weapon that fired was in.  
+When a projectile is unknown it will allow the scripts to handle the firing of the projectile. Example: if the disc for the disc launcher is unknown then it will call the function DiscLauncherImage::onFire();.  
+
+  

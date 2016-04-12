@@ -1,0 +1,50 @@
+. 
+ SERVER CORPS 
+
+Introduction 
+Directories 
+Initialization 
+Building a Simple Example 
+Loading A Mod 
+Identifying Loaded Mods 
+
+Introduction 
+
+Mods are used to override or extend the behavior of the TRIBES.  This is accomplished by allowing mods to override the default files provided in the "base" directory structure and volumes. Running a dedicated TRIBES servers using the mod option does several things; first the file search path is modified to search the mod directories first when looking for a file, second, volumes located in the mod's skins and voices directories are all automatically loaded. Several mods can be loaded at once, each successive mod will override the previously loaded mods. 
+
+Directories 
+
+The following directories are added to the search path, where "mod" is the name of the mod being loaded (located in the TRIBES root dir.): 
+  mod\voices Contains all the voices for the mod.  All volumes located in this directory are loaded automatically. 
+mod\skins Contains all the skins used by the mod. All volumes located in this directory are all loaded automatically. 
+mod\fonts Font files 
+mod\scripts Script files 
+mod\missions Missions (.ted, .vol, .dsc) 
+
+
+Initialization 
+
+When a mod is loaded, the volume modname.vol in the mod directory is loaded (if it exists), then the file modname.cs is executed.  The mod initialization script can be used to load other need volumes, or exec other scripts. 
+
+Note:  The auto load and auto modname exec feature are currently not working, but will be fixed in the first server patch.  Until that patch is available, have modename.cs executed from the server config (or autoexec) file. 
+
+Building A Simple Example 
+
+The simplest scripting mod is one that simply overrides an existing script file, and does not have an intialization script or volumes to load.  A simple example is a mod called weapon that tweaks the settings of the default weapons. First the weapon and weapon\scripts directories are created in the root TRIBES directory. Then a copy of baseProjData.cs (extracted from the scripts.vol file) is copied into weapon\scripts. Most of the weapon settings are in the baseProjData.cs file. The file is then modified to do something interesting, such as increase the amount of damage on the discs.  This mod would only contain one file weapon/scripts/baseProjData.cs. 
+
+Loading a Mod 
+
+Mods are loaded on the command line when TRIBES is stared. (Se the Basic Administration page on how to setup and start a dedicated server): 
+
+    tribes -mod weapon -dedicated 
+
+More than one mod can be loaded at the same time: 
+
+    tribes -mod weapon -mod foo -mod bar -dedicated 
+
+In this case, the file search path would include bar first, then foo, then weapon1, then the base directory. If all the mods had a file called baseProjData.cs, only the one in bar would get executed. If, instead bar had a different file which declares new weapons, then  they wouldn't interfear with the other weapons defined in the earlier mods. Mods can also be loaded while running non dedicated servers using the same -mod command line argument.". 
+
+Identifying Loaded Mods 
+
+The Server Type column in the Join Server list is the mod directory search path.  The default search path is base. If mod weapon is loaded the mod path, and the server type, become "weapon base".  If more than one mod is loaded all the names are displayed in search path order, "bar foo weapon base". 
+ 

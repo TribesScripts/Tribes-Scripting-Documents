@@ -1,0 +1,103 @@
+Group and Set Functions 
+ Updated 04/09/99 
+
+containerBoxFillSet(Set, Mask, Position, Length, Width, Height, SHeight) 
+Set: Block of room setup to hold objects. 
+Mask: Defines what object or objects to search for. 
+Mask Values: $SimTerrainObjectType, $SimInteriorObjectType, 
+                  $SimPlayerObjectType, $MineObjectType, 
+                  $MoveableObjectType, $VehicleObjectType, 
+                  $StaticObjectType,  $ItemObjectType 
+Position: Center position of the area to search. 
+Length: Length of the area to search. 
+Width: Width of the area to search. 
+Height: Height of the area to search. 
+SHeight: Allows the height area to start at the Positions Z value 
+             and go up a distance of SHeight.. 
+USED IN: Game.cs, Item.cs, Mine.cs, Objectives.cs, and Station.cs 
+RETURN: Number. Number of Objects added to the Set. If failed then "False". 
+Creates a box of size Length, Width, and  Height around the point specified by Position.  Position is now the center of our box. It will then search all objects with in that box area and with the given type(s) specified by Mask and store them in the Set.  Set now holds all the objects that you where looking for.  Use functions like Group::getObject to iterate through the Set.  Make sure you delete the Set when you are finished. For example: 
+             We want a box of size L=100, W=100, H=100 with the center 
+             of the box being at location P=(30,50,60). 
+             Set = newObject("set",SimSet); 
+             Pos = "30 50 60"; 
+             Mask = $VehicleObjectType | $MineObjectType; 
+             num =containerBoxFillSet(Set, Mask, Pos, 100, 100, 100,0); 
+             Set now holds all vehicles and mines found in that area. 
+             Finished with set so.. deleteObject(Set);  
+
+Group::iterateRecursive(Group or Set, Function, [Arg1, ...]) 
+Group or Set: Block of space setup to hold objects. 
+Function: The function to be performed on all the objects in the Group or Set. 
+Arg1: Arguments that need to be passed to the Function. If Function takes no arguments then only pass Group or Set and Function. 
+USED IN: Objective.cs 
+RETURN: 0.  
+Used to perform the Function on all objects in the Group or Set.  
+
+Group::objectCount(Group or Set) 
+Group or Set: Block of room setup to hold objects.
+USED IN: AI.cs, Game.cs, Objectives.cs, Station.cs, ... 
+RETURN: Number. Objects in the Group or Set. If failed then 0.  
+Used to count the number of objects in a Group or Set.  
+
+Group::getObject(Group or Set, Index) 
+Group or Set: Block of room setup to hold objects. 
+Index: The object to be extracted from the Group or Set.
+USED IN: AI.cs, Game.cs, Item.cs, Objectives.cs, Station.cs, ... 
+RETURN: The desired object extracted from the Group or Set. If failed then -1.  
+Used to get a specific object out of the Group or Set. 
+          For example: 
+             Set holds these objects 8439, 8449, 8663. Where 8439 is 
+             Index 0, 8449 is Index 1, and so on... 
+             We want object 8449 so we set 
+             Index = 1; 
+             Object = Group::getObject(Set, Index); 
+             Object now holds the object Id(8449).  
+
+removeFromSet(Group or Set, Index) 
+ 
+Set or Group: Block of space setup to hold objects. 
+Index: The object to be extracted from the Group or Set. 
+USED IN: Objectives.cs 
+RETURN: True if succeed. False if failed.  
+Used to remove an object from a Group or Set. Look at the Group::getObject function for an example.  
+
+addToSet(Set or Group, Object) 
+ 
+Set or Group: The area to add the Object to. 
+Object: The object wanted to be add to the Set or Group. 
+USED IN: Item.cs, Missiontypes.cs, NewMission.cs, Player.cs, ... 
+RETURN: True if succeed or False if failed.  
+Used to add an Object to a Set or Group.  
+
+getGroup(Object) 
+ 
+Object: The object Id. Example: 8361. 
+USED IN: Objectives.cs, Station.cs, Trigger.cs 
+RETURN: Group Id.  
+Used to get what Group the object is currently in.  
+
+activateGroup(Group or Set) 
+ 
+Group or Set: Block of room setup to hold objects. 
+USED IN: Currently not used in any script files. 
+RETURN: True if succeed or False if failed.  
+Used to trigger all objects in the Group or Set. 
+
+nameToID(Name) 
+ 
+Name: The name of a Group or Set. 
+USED IN: Ai.cs, Game.cs, Objectives.cs 
+RETURN: Id. Id of the Group or Set. Example: 8632. If failed then -1.  
+This will convert a Group or Set Name into its Id. 
+          For example: 
+              Look at the function Game::pickRandomSpawn in the game.cs 
+              file. Also look at the raindance.mis file. In the mis file 
+              you will find a directory tree like this 
+              MissionGroup/Teams/team0/DropPoints/Random. 
+              Under the Random group are a bunch of waypoints.  So when 
+              the nameToId(NAME) is called it returns the location where 
+              all the waypoint can be found.  So Game::pickRandomSpawn 
+              randomly picks one of the waypoints in the Random group. 
+
+  

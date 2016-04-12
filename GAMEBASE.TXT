@@ -1,0 +1,375 @@
+Gamebase Functions 
+ Updated 04/01/99 
+
+GameBase::playSound(Object, Sound, Channel) 
+Object: The object Id. Example: 8361. 
+Sound: The name of the sound to play.  Look in Nsound.cs for an example of setting up a SoundData block. 
+Channel: The channel to play the sound on. The number of avaiable channels for one Object is four the range is 0 through 3. 
+USED IN: Moveable.cs 
+RETURN: True if succeed or False if failed.  
+Used to play the Sound at the location that the Object is currently at.  
+
+GameBase::generatePower(Object, Bool) 
+Object: The object Id. Example: 8361. 
+Bool: True then Object is generating power. False then Object has stoped generating power. 
+USED IN: Staticshape.cs 
+RETURN: True if succeed or False if failed.  
+Used to set the generator status either working or not. This is used to inform all objects that depend on that generator for power.  
+
+GameBase::isPowerGenerator(Object) 
+Object: The object Id. Example: 8361. 
+USED IN: Currently not used in any script files. 
+RETURN: True if it is a Generator, False if not, or False if failed.  
+Used to see if the Object is a generator.  
+
+GameBase::getPowerCount(Object) 
+Object: The object Id. Example: 8361. 
+USED IN: Currently not used in any script files. 
+RETURN: Number. The number of generators power count. If failed then 0.  
+Used to get the number of generators powering the Object. If two generators are powering an object and one gets destroyed then the function would return one.  
+
+GameBase::isPowered(Object) 
+Object: The object Id. Example: 8361. 
+USED IN: Moveable.cs, Sensor.cs, Station.cs, Turret.cs, ... 
+RETURN: True if the object has a working power source or False on all other accounts.  
+Used to check if the Object currently has a functioning power source.  
+
+GameBase::getTeam(Object or Client) 
+Object: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049.
+USED IN: Admin.cs, Ai.cs, Game.cs, Item.cs, Objectives.cs, ... 
+RETURN: Team number in the range 0-7. If failed then -1.  
+Used to get what team the Object or Client is currently assigned to. 
+
+GameBase::setTeam(Object or Client, TeamNum) 
+Object: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+TeamNum: Team number.  Each team is associated with a number range from -1 to 7.  Where -1 is the observer team. 
+USED IN: Ai.cs, Game.cs, Item.cs, Observer.cs, Server.cs, ... 
+RETURN: True if succeed or -1 if failed.  
+Used to assign an Object or Client to a particular team defined by the TeamNum value.  
+
+GameBase::getPosition(Object or Client) 
+Object: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Ai.cs, Game.cs, Item.cs, Objectives.cs, Player.cs, ... 
+RETURN: If succeed "X Y Z" position of the Object or Client. Example: "351 -234 33". If failed then "0 0 0".  
+Used to find the current (X Y Z) position of the Object or Client. The X and Y positions are found from the center of the map at 0,0.  The Z is the height of the Object or Client.  
+
+GameBase::getRotation(Object or Client) 
+Object: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Ai.cs, Game.cs, Item.cs, Station.cs, Vehicle.cs 
+RETURN: If succeed "X Y Z" rotation of the Object or Client. Example: "0 0 1.45". If failed then "0 0 0".  
+Used to find the current (X Y Z) rotation of the Object or Client. X value is the rotation around the X axis, Y value is the rotation around the Y axis, and Z is the rotation around the Z axis. In most cases X and Y will be 0 and Z will be between 3.14 and -3.14. X and Y will be none zero if for example you are in a flyer making a turn or flying up or down.  
+
+GameBase::setPosition(Object or Client, Position) 
+Object: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Position: The "X Y Z" value used to set the position on the map. For Example: Position = "100 -200 40" This will move the Object or Client 100 in the positive X direction(EAST), -200 in the negative Y direction (SOUTH), and 40 in the positive Z direction(UP).  The new position is offset from the "0 0 0" location on the map. 
+USED IN: Item.cs, Objectives.cs, Station.cs, Player.cs, Vehicle.cs 
+RETURN: True if succeed or False if failed. 
+Used to set the Object or Client to the location specified by the Position argument.  
+
+GameBase::setRotation(Object or Client, Rotation) 
+Object: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+Rotation: The "X Y Z" value used to set the position on the map. For Example: Position = "1.3 -3.0 0" This will rotate the Object or Client 1.3 in the positive X direction, -3.0 in the negative Y direction, and 0 in the positive Z direction.
+USED IN: Item.cs, Station.cs, Vehicle.cs 
+RETURN: True if succeed or False if failed.  
+Used to set the Object or Client to the rotation specified by the Rotation argument.  
+
+GameBase::getTransform(Object or Client) 
+Object: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Currently not used in any script files. 
+RETURN: Transform. Combining the Position and Rotation is called the Transform. Example:"234 -122 43 0 0 2.3". The Position is equal to "234 -122 43". The Rotation is equal to "0 0 2.3". If failed then "0 0 0 0 0 0".  
+Used to get the Position and Rotation of an Object or Client.  The position and rotation will be combined together in with the position before the rotation.  
+
+GameBase::getDataName(Object) 
+Object: The object Id. Example: 8361.
+USED IN: BaseProjData.cs, Item.cs, Mine.cs, Moveable.cs, Player.cs, ... 
+RETURN: Data block name. Example: "Chaingun". If failed then "".  
+Used to get the data block name of the object. Look in the file Item.cs for the name ItemData. This is defining an item data block. Examples of Data Names are: Flag or Chaingun. Look in Station.cs file for the name StaticShapeData. This is defining a Static Shape data block. Examples of Data Names are: DeployableAmmoStation or DeployableIncStation.  
+
+GameBase::isAtRest(Object) 
+Object: The object Id. Example: 8361.
+USED IN: Mine.cs 
+RETURN: True if it is at rest or False if still moving. 
+Used to see if an object is still moving.  
+
+GameBase::testPosition(Object, Position) 
+Object: The object Id. Example: 8361. 
+Position: The "X Y Z" value used to set the position on the map. For Example: Position = "100 -200 40" This will move the Object or Client 100 in the positive X direction(EAST), -200 in the negative Y direction (SOUTH), and 40 in the positive Z direction(UP).  The new position is offset from the "0 0 0" location on the map.
+USED IN: Vehicle.cs 
+RETURN: True if the Object can move to the Position. False if a collision occurs with another object 
+Used to see if the Object can move to the desired Position.  
+
+  ShapeBase object functions. Called GameBase:: to simply out public script interface a little.  Functions should behave gracefully if object is not derived from ShapeBase  
+
+GameBase::setSequenceDirection(Object, Thread, Forward) 
+Object: The object Id. Example: 8361. 
+Thread: Each object can be assigned up to 4 sequences to be played 0-3. 
+Forward: If a non zero value is passed in then the sequence will go forward. If zero then it will go backwards.
+USED IN: Station.cs 
+RETURN: True if succeed or False if failed.  
+Used to set the direction of the animation to be played by the object.  
+
+GameBase::playSequence(Object, Thread, <Sequence>) 
+Object: The object Id. Example: 8361. 
+Thread: Each object can be assigned up to 4 sequences to be played 0-3. 
+Sequence: The Objects animation to be played. If the Sequence argument is passed in then that Sequence will be assigned to that Thread.
+USED IN: Mine.cs, Sensor.cs, Staticshape.cs, Station.cs, Turret.cs 
+RETURN: True if succeed or False if failed.  
+Used to start playing a sequence. If no Sequence argument is passed in then it will play the Sequence that Thread is defined to.  
+
+GameBase::pauseSequence(Object, Thread) 
+Object: The object Id. Example: 8361. 
+Thread: Each object can be assigned up to 4 sequences to be played 0-3. 
+USED IN: Sensor.cs, Station.cs 
+RETURN: True if succeed or False if failed.  
+Used to pause the sequence that defined by the thread.  
+
+GameBase::setRechargeRate(Object, Rate) 
+Object: The object Id. Example: 8361. 
+Rate: Amount to increase energy every second. 
+USED IN: Player.cs, Sensor.cs, Turret.cs, Vehicle.cs 
+RETURN: True if succeed or False if failed.  
+Used to set the Rate at which the Objects energy will recharge every second.  
+
+GameBase::getRechargeRate(Object) 
+Object: The object Id. Example: 8361. 
+USED IN: Currently not used in any script files. 
+RETURN: Rate. The value at which the Objects energy recharges at. If failed then "0".  
+Used to get the current rate at which the Objects energy recharges at.  
+
+GameBase::setAutoRepairRate(Object, Rate) 
+Object: The object Id. Example: 8361. 
+Rate: Amount to increase health every second. 
+USED IN: BaseProjData.cs 
+RETURN: True if succeed or False if failed.  
+Used to set the Rate at which the Objects health will increase every second.  
+
+GameBase::getAutoRepairRate(Object) 
+Object: The object Id. Example: 8361. 
+USED IN: BaseProjData.cs 
+RETURN: Rate. The value at which the Objects energy recharges at. If failed then "0".  
+Used to get the rate that the Object is getting repaired at.  
+
+GameBase::repairDamage(Object, Rate) 
+Object: The object Id. Example: 8361. 
+Rate: Amount to increase health every second. 
+USED IN: Item.cs, Station.cs 
+RETURN: True if succeed or False if failed.  
+Used to set the Rate at which the Objects health will increase every second.  
+
+GameBase::throw(Item, Object, Vel, Random) 
+Item: The data block name of the item. Example: Chaingun 
+Object: The object Id. Example: 8361. 
+Vel: Velocity the Item will be thrown at. 
+Random: If True then it will be thrown in a random direction. If False then it will be thrown in the direction the object is facing. 
+USED IN: Item.cs, Objectives.cs 
+RETURN: True if succeed or False if failed.  
+Used to throw an object.  Example: When you die your pack and weapon is thrown random directions.  
+
+GameBase::setEnergy(Object, Value) 
+Object: The object Id. Example: 8361. 
+Value: The amount of energy to set. 
+USED IN: BaseProjData.cs, Player.cs, Staticshape.cs 
+RETURN: True if succeed or False if failed.  
+Set the Objects energy level. Example: When they have a shield on and get hit then the damage value is subtracted from the Objects energy.  
+
+GameBase::getEnergy(Object) 
+Object: The object Id. Example: 8361. 
+USED IN: BaseProjData.cs, Player.cs, Staticshape.cs 
+RETURN: Value. The current energy level of the Object. If failed then "0".  
+Used to get the current energy level of the Object.  
+
+GameBase::getDamageLevel(Object) 
+Object: The object Id. Example: 8361. 
+USED IN: BaseProjData.cs, Dm.cs, Item.cs, Mine.cs, ... 
+RETURN: Value. The current health level of the Object. If failed then "0".  
+Used to get the Objects current health amount.  
+
+GameBase::setDamageLevel(Object, Value) 
+Object: The object Id. Example: 8361. 
+Value: The amount of health left. 
+USED IN: Dm.cs, Mine.cs, Moveable.cs, Player.cs, Staticshape.cs 
+RETURN: True if succeed or False if failed.  
+Used to set the health level of an object.  
+
+GameBase::getDamageState(Object) 
+Object: The object Id. Example: 8361. 
+USED IN: Player.cs, Station.cs 
+RETURN: State. There are three predefined states: 
+         Enabled: If Object is fully functional. 
+         Disabled: If Object is damaged so it cant function. 
+         Destroyed: If Object is destroyed. 
+         If failed then "0".  
+Used to find what state the Object is in.  
+
+
+GameBase::applyDamage(Object, Type, Value, Pos, Vec, Mom, SourceObj 
+ 
+Object: The object Id of the object getting damaged. Example: 8361. 
+Type: Type of damage: 
+       $ImpactDamageType    = -1; 
+       $LandingDamageType   =  0; 
+       $BulletDamageType      =  1; 
+       $EnergyDamageType      =  2; 
+       $PlasmaDamageType      =  3; 
+       $ExplosionDamageType   =  4; 
+       $ShrapnelDamageType    =  5; 
+       $LaserDamageType       =  6; 
+       $MortarDamageType      =  7; 
+       $BlasterDamageType     =  8; 
+       $ElectricityDamageType =  9; 
+       $CrushDamageType       = 10; 
+       $DebrisDamageType      = 11; 
+       $MissileDamageType     = 12; 
+       $MineDamageType        = 13;
+Value: Damage value. 
+Pos: The position where the projectile hit the Object. 
+Vec: The projectiles vector. 
+Mom: Momentum of the projectile. 
+SourceObj: What object is applying the damage or shot the projectile. 
+USED IN: BaseProjData.cs, Moveable.cs 
+RETURN: True if succeed or False if failed.  
+Used to apply damage to an Object. Example of use: getting hit by a projectile, a flier hitting an object, ect.  
+
+GameBase::activateShield(Object, Vector, <OffSetZ>) 
+Object: The object Id. Example: 8361. 
+Vector: A vector from the center of the object to the location where the projectile hit the shield. 
+OffsetZ: Allows you to adjust the height of the shield if needed.
+USED IN: Player.cs, Staticshape.cs 
+RETURN: True if succeed or False if failed.  
+Used to display the shield effect on shielded objects  
+
+GameBase::getLOSInfo(Object,Dist,<Rot>) 
+Object: The object Id. Example: 8361. 
+Dist: The max distance this function will look for an object. In meters. 
+Rot: Rotation argument optional. If no rotation is passed in then it will use the objects current line of site. Look in Station.cs for an example of the rotation. Example: "0 0 3.14" this will do the LOS directly behind the Object.
+USED IN: Ai.cs, Item.cs, Station.cs 
+RETURN: True if succeed or False if failed.  
+Does a line of site projection Dist meters away and returns what object was found. It sets the following global variables: 
+             $los::position: Position the LOS hit the object "X Y Z". 
+             $los::normal: LOS vector Normalized. 
+             $los::object: The Id of the object that was hit by the LOS 
+
+GameBase::setMapName(Object, Name) 
+Object: The object Id. Example: 8361. 
+Name: The Objects name to be displayed on the command map.
+USED IN: Item.cs, Station.cs, Turret.cs, Vehicle.cs 
+RETURN: True if succeed or False if failed.  
+Used to give Objects a name that will appear on the command map. Also gives a name when LOS is used 
+
+GameBase::getMapName(Object) 
+Object: The object Id. Example: 8361.
+USED IN: BaseProjData.cs, Station.cs, Turret.cs 
+RETURN: Name. The name used on the command map. If failed then "".  
+Used to get the Objects map name. The object map name is the name that is displayed on the command map. 
+
+GameBase::virtual(Object, Function, <Arg1, Arg2, ...>) 
+Object: The object Id. Example: 8361. 
+Function: The name of the function to be called. 
+Arg1: Arguments that need to be passed to the Function.
+USED IN: BaseProjData.cs, Objectives.cs, Trigger.cs, Turret.cs 
+RETURN: What value Function returns. If failed then "".  
+Used to call the Function on the Object .  Example: If the object is the Blood Eagle flag that you where carrying. You step out of the mission area and the GameBase::virtual(%obj," playerLeaveMissionArea",%player); is called. %obj is the Blood Eagle flag so Flag::playerLeaveMissionArea is called. 
+
+GameBase::setActive(Object, Bool) 
+Object: The object Id. Example: 8361. 
+Bool: True if Object is active. False if Object is not active.
+USED IN: Mine.cs, Moveable.cs, Sensor.cs, Staticsshape.cs, ... 
+RETURN: True if succeed or False if failed.  
+Used to set if the Object is active or not. Used along with the GameBase::isActive() function. 
+
+GameBase::isActive(Object) 
+Object: The object Id. Example: 8361.
+USED IN: Mine.cs, Moveable.cs, Station.cs 
+RETURN: True if active or False if not active.  
+Used to see if the Object is active. 
+
+GameBase::getMuzzleTransform(Player or Client) 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049.
+USED IN: Currently not used in any script files. 
+RETURN: Transform of the Players weapon. If failed then 
+"1 0 0 0 1 0 0 0 1 0 0 0".  
+Used to get the Transform of the Players weapon. The transform returned is base on world coordinates. 
+
+GameBase::startFadeOut(Object) 
+Object: The object Id. Example: 8361.
+USED IN: Item.cs, Station.cs, Objectives.cs, Player.cs, ... 
+RETURN: True if succeed or False if failed.  
+This will fade out the object. Example: When a player dies after X amount of time the player will slowly fade away. It takes 2.5 seconds to fade out an object. Keep in mind that even though you have faded out the object it is still there until you delete it. 
+
+GameBase::startFadeIn(Object) 
+Object: The object Id. Example: 8361.
+USED IN: Item.cs, Objectives.cs, Station.cs, Staticshape.cs, ... 
+RETURN: True if succeed or False if failed.  
+This will fade in the Object. Example: When a flag gets returned back to a base it fades in. 
+
+GameBase::applyRadiusDamage(Type, Center, Radius, DValue, Force, Object) 
+Type: Type of damage: 
+       $ImpactDamageType    = -1; 
+       $LandingDamageType   =  0; 
+       $BulletDamageType      =  1; 
+       $EnergyDamageType      =  2; 
+       $PlasmaDamageType      =  3; 
+       $ExplosionDamageType   =  4; 
+       $ShrapnelDamageType    =  5; 
+       $LaserDamageType       =  6; 
+       $MortarDamageType      =  7; 
+       $BlasterDamageType     =  8; 
+       $ElectricityDamageType =  9; 
+       $CrushDamageType       = 10; 
+       $DebrisDamageType      = 11; 
+       $MissileDamageType     = 12; 
+       $MineDamageType        = 13; 
+Center: The center of the Object that is causing the Radius Damage. 
+Radius: The radius is a predefined value that was set when the object was created. Use GameBase::getRadius() to find object radius. 
+DValue: The damage value to apply. 
+Force: The max force to apply to surrounding objects. 
+Object: The Id of the object causing the Radius Damage. Example: 8361.
+USED IN: Staticshape.cs 
+RETURN: True if succeed or False if failed.  
+Used to apply damage to Objects when an Objects explodes. If an object was at the center of the explosion then that object would be damaged by a value of DValue and a force would be applied to it defined by Force. The further away from the center of the explosion the less DValue and Force will be applied the those objects. 
+
+GameBase::getRadius(Object) 
+Object: The object Id. Example: 8361.
+USED IN: Staticshape.cs 
+RETURN: Float. The radius of the Object. If failed then "False"  
+Used to get the radius of the Object. The radius is a predefined value that was set when the object was created. 
+
+GameBase::getDisabledDamage(Object) 
+Object: The object Id. Example: 8361.
+USED IN: Staticshape.cs 
+RETURN: Float. The disable level.  
+Used to get the level at which the Object becomes disabled 
+
+
+StaticBase object functions, called GameBase:: 
+
+GameBase::setIsTarget(Object, Bool) 
+Object: The object Id. Example: 8361. 
+Bool: True then set it up to be a target. False no target info.
+USED IN: Beacon.cs 
+RETURN: True if succeed or False if failed.  
+Used to set the Object up with target information. The beacon is an example of target information. It has the Triangle and meters away information. 
+
+GameBase::getOwnerClient(Object) 
+Object: The object Id. Example: 8361. 
+USED IN: Player.cs 
+RETURN: Client Id. Example: 2049. If failed then -1.  
+Used to get the Client Id from the Object Id. 
+
+GameBase::getControlClient(Object) 
+Object: The object Id. Example: 8361. 
+USED IN: Turret.cs, Player.cs, Station.cs, Vehicle.cs, ... 
+RETURN: Client Id. Example: 2049. If failed then -1.  
+Used to get the Client Id from the Object Id. 
+
+
+
+ 

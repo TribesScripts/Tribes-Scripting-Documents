@@ -1,0 +1,38 @@
+CLIENT ONLY FUNCTIONS 
+ Updated 04/05/99  
+
+useItem(Type) 
+Type: Each item has an associated integer called a Type. The Item associated with the ItemData block first encountered when loading will receive the integer 0. The next will receive integer 1 and so on. Look in Item.cs for examples of ItemData blocks like flag, ScoutVehicle, and Weapon. 
+USED IN: Client.cs 
+RETURN: True if succeed. False if failed.  
+Used to allow the Player to utilized the Item. Example if you want to use a chaingun then you would call useItem(13);.  
+
+getItemType(Item) 
+Item: The data block name of the item. Example: Chaingun 
+USED IN: Client.cs 
+RETURN: Type. All items are associated with a integer called a Type. The Item associated with the ItemData block first encountere when loading will receive the integer 0. The next will receive integer 1 and so on. Look in Item.cs for examples of ItemData blocks like flag, ScoutVehicle, and Weapon. If failed then False.  
+All Items are associated with an integer.  In some cases you will need to use that integer to reference the Item not the Items data block name.  To find the Type(integer) associated with the Item use this function. 
+
+getItemCount(Item) 
+Item: The desired item to count.  Example: chaingun. 
+USED IN: Currently not used in any script files. 
+RETURN: Number. The total number of that item the player has. If failed then 0.  
+Count the number of Items the player currently has in his personal inventory. 
+
+getMountedItem(MountPoint) 
+MountPoint: There are three mount points. Mount point 0 is the $WeaponSlot, 1 is the $BackpackSlot, and  2 is the $FlagSlot. 
+USED IN: Currently not used in any script files. 
+RETURN: Item. The item at that mount point. Example: chaingun. If -1 is returned then there is nothing mounted at that MountPoint. If failed then -1.  
+Used to find what items are mounted at the desired MountPoint. 
+
+getManagerId() 
+USED IN: Client.cs 
+RETURN: Player Id. 
+   
+Is used to find the player Id from the client Id. 
+
+  
+
+  
+
+  

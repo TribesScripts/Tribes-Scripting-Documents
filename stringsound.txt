@@ -1,0 +1,71 @@
+String Sound Animation Functions 
+ Updated 04/15/99 
+
+sprintf(String,[Arg1,Arg2....Arg9]) 
+ 
+String: Is a string with %1,%2..%9 embedded through out it. 
+Arg1: Will replace the %1. 
+Arg2: Will replace the %2. 
+USED IN: Game.cs 
+RETURN: String. The desired string. If failed then False.  
+Create a string for example: String = "My %2 is %1.". 
+          Set Arg1 = "hurt" and Arg2 = "foot". 
+          outString = sprintf(String,Arg1,Arg2); 
+          outString will be equal to: "My foot is hurt."  
+
+getWord(String, Num) 
+ 
+String: Is a string of words or numbers separated by spaces. 
+Num: A number ranging from 0 to number of words in string minus 1.
+USED IN: Vehicle.cs, Staticshape.cs, Objectives.cs, ... 
+RETURN: String. The extracted word. If failed then -1.  
+The function is used to extract certain words out of a string. 
+          For example: 
+             I want to extract the word foot from the following string. 
+             String = "My foot is hurt"; 
+             Num = 1; 
+             answer = getWord(String, Num); 
+             answer is equal to "foot".  
+
+escapeString(String) 
+ 
+String: Is a string of text.
+USED IN: Comchat.cs, Server.cs 
+RETURN: String. Formated to print properly. If failed then "". 
+Takes a string that might have unprintable characters and convert them to printable characters.  
+
+RemotePlayAnim(Client, Anim) 
+ 
+Client: The Client Id. Example: 2049. 
+Anim: Animation to play. The animations are setup in the ArmorData.cs file. In the PlayerData block there is an array called animData. Those are the animations to be played for each armor type. Playable animations for this function is 38 through 50. If Anim is 0 then it will play animation 38 in the PlayerData block.
+USED IN: Client.cs 
+RETURN: 0. 
+Used to play an animation on a client.  
+
+playVoice(ClientId, Wav) 
+ 
+ClientId: The player who is playing the voice. 
+Wav: The voice sound to be played.  The voice sounds are in the base\voice directory.  The volume used depends on the voice set and the gender you selected when creating your player. For example female1.vol is used when voice set 1 is selected and the players gender is female.
+USED IN: Client.cs, Player.cs 
+RETURN: True if succeed or False if failed. 
+This will cause the Client to play the desired voice sound. 
+          For example: You want to play the voice "Move out of the way". 
+             When creating your player you selected voice set 3 and your 
+             gender to be male. 
+             playVoice(MyClientId, "outway"); 
+             The player MyClientId is a male and the voice set is 3 so it 
+             will go to the volume marked male3.vol and extract the 
+             male3.woutway.wav file to be played.  
+
+playSound(Sound, Position) 
+ 
+Sound: The name of the sound to play.  Look in Nsound.cs for an example of setting up a SoundData block. 
+Position: The position on the map that the sound will be played.
+USED IN: Item.cs, Moveable.cs, Player.cs, Vehicle.cs 
+RETURN: True if succeed or False if failed. 
+Will play a sound at a given location on the map.  
+
+
+  
+
+  

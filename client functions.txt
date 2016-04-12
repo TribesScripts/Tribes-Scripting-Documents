@@ -1,0 +1,378 @@
+CLIENT FUNCTIONS . 
+ Updated 04/01/99 
+
+Client::setDataFinished(Client) 
+Client: The Client Id. Example: 2049. 
+USED IN: Server.cs 
+RETURN: True if succeed and "" if failed.  
+Used to tell the server that the Client has finished receiving all the data block information. That must be finished before ghosting can start.  
+
+Client::limitCommandBandwidth(Client, Bool) 
+Client: The Client Id. Example: 2049
+Bool: True if want to limit command band width or False if don't.
+USED IN: Observer.cs 
+RETURN: True if succeed or False if failed. 
+ 
+Used when a Player is in the command map. This is used to reduce the amount of data sent to the commander. The reason for the reduction is to increase other options like player camera follow.  
+
+Client::setMenuScoreVis(Client, Bool) 
+Client: The Client Id. Example: 2049. 
+Bool: True if want to show screen or False want to hide screen. 
+USED IN: Menu.cs 
+RETURN: 1 if succeed or 0 if failed. 
+ 
+Used to display the score screen.  The score screen is the screen accessed by pressing the TAB key.  
+
+Client::getOwnedObject(Client) 
+Client: The Client Id. Example: 2049. 
+Bool: True if want to show screen or False want to hide screen. 
+USED IN: Admin.cs, Ai.cs, Item.cs, Player.cs, Station.cs, ... 
+RETURN: Object Id. Example: 8361. If failed then -1.
+ 
+Used to get the Object Id from the Client Id. 
+
+Client::getControlObject(Client) 
+Client: The Client Id. Example: 2049.
+Bool: True if want to show screen or False want to hide screen. 
+USED IN: Observer.cs, Player.cs 
+RETURN: Object Id. Example: 8361. If failed then -1. 
+ 
+Used to find out what object the Client is currently controling. 
+
+Client::setOwnedObject(Client, Object) 
+Client: The Client Id. Example: 2049. 
+Object: The object Id. Example: 8361.
+USED IN: Game.cs, Observer.cs, Player.cs 
+RETURN: True if succeed or False if failed. 
+ 
+Sets the Clients owned object to the Object.  
+
+
+Client::setControlObject(Client, Object) 
+Client: The Client Id. Example: 2049. 
+Object: The object Id. Example: 8361..
+USED IN: Vehicle.cs, Game.cs, Observer.cs, Player.cs, ... 
+RETURN: True if succeed or False if failed. 
+ 
+Sets what object the client is to control. Is used when controling a turret, camera, vehicle, etc.. 
+
+
+
+Client::setSkin(Client,Skin) 
+Client: The Client Id. Example: 2049. 
+Skin: Name of the skin to be set. Example:purple, blue. 
+USED IN: Dm.cs, Game.cs 
+RETURN: Client Id. Example: 2049. If failed then -1.
+ 
+It will look in the base\skins directory  
+
+
+
+Client::getTransportAddress(Client) 
+Client: The Client Id. Example: 2049. 
+USED IN: Admin.cs, Server.cs 
+RETURN: IP address. Example: IP:198.74.33.77:1652.
+ 
+IP address. Example: IP:198.74.33.77:1652. 
+
+
+
+Client::getFirst() 
+USED IN: Admin.cs, Comchat.cs, Game.cs, Server.cs, ... 
+RETURN: Client Id. The first client in the client list. If failed then -1.
+ 
+Used to get the first client in the client list. Most commonly used with the Client::getNext() function.  Those two functions will allow you to iterate through all the clients on the server.  
+
+
+
+Client::getNext(Client) 
+Client: The Client Id. Example: 2049.
+USED IN: Admin.cs, Comchat.cs, Game.cs, Item.cs, Server.cs, ... 
+RETURN: Client Id. The next client in the list. If failed or no more clients in the list then -1.
+ 
+Used to get the next client in the client list. It will us the Client Id passed in and return you the next client in the list.  
+
+
+
+Client::setItemShopping(Client, <Type or Item, ...>) 
+Client: The Client Id. Example: 2049. 
+Type: Each item has an associated integer called a Type. The Item associated with the ItemData block first encountered when loading will receive the integer 0. The next will receive integer 1 and so on. Look in Item.cs for examples of ItemData blocks like flag, ScoutVehicle, and Weapon. 
+Item: The data block name of the item. Example: Chaingun 
+USED IN: Station.cs 
+RETURN: True if succeed or False if failed.
+ 
+Used to setup what Items are available to buy from a station. It keeps adding Items to the current shopping list for that Client. 
+
+
+
+Client::clearItemShopping(Client, <Type or Item, ...>) 
+Client: The Client Id. Example: 2049. 
+Type: Each item has an associated integer called a Type. 
+The Item associated with the ItemData block first encountered when loading will receive the integer 0. The next will receive integer 1 and so on. Look in Item.cs for examples of ItemData 
+blocks like flag, ScoutVehicle, and Weapon. 
+Item: The data block name of the item. Example: Chaingun 
+USED IN: Admin.cs, Game.cs, Observer.cs, Station.cs 
+RETURN: True if succeed or False if failed.
+ 
+Clears the Clients shopping list. Shopping list is created by calling the Client::setItemShopping() function.  
+
+
+
+Client::isItemShoppingOn(Client, Type or Item) 
+Client: The Client Id. Example: 2049. 
+Type: Each item has an associated integer called a Type. 
+The Item associated with the ItemData block first encountered when loading will receive the integer 0. The next will receive integer 1 and so on. Look in Item.cs for examples of ItemData 
+blocks like flag, ScoutVehicle, and Weapon. 
+Item: The data block name of the item. Example: Chaingun 
+USED IN: Admin.cs, Game.cs, Observer.cs, Station.cs 
+RETURN: True if succeed or False if failed.
+ 
+Clears the Clients shopping list. Shopping list is created by calling the Client::setItemShopping() function.  
+
+
+
+Client::setItemBuying(Client, <Type or Item, ...>) 
+Client: The Client Id. Example: 2049. 
+Type: Each item has an associated integer called a Type. The Item associated with the ItemData block first encountered when loading will receive the integer 0. The next will receive 
+integer 1 and so on. Look in Item.cs for examples of ItemData 
+blocks like flag, ScoutVehicle, and Weapon. 
+Item: The data block name of the item. Example: Chaingun 
+USED IN: Station.cs 
+RETURN: True if succeed or False if failed.
+ 
+Used to add items to the Buying list. The items on the shopping list that are not on the buy list will show up grayed out.  
+
+
+
+Client::clearItemBuying(Client, <Type or Item, ...>) 
+Client: The Client Id. Example: 2049. 
+Type: Each item has an associated integer called a Type. The Item associated with the ItemData block first encountered when loading will receive the integer 0. The next will receive 
+integer 1 and so on. Look in Item.cs for examples of ItemData blocks like flag, ScoutVehicle, and Weapon. 
+Item: The data block name of the item. Example: Chaingun 
+USED IN: Station.cs 
+RETURN: True if succeed or False if failed.
+ 
+Clears the Clients buying list. Buying list is created by calling the Client::setItemBuying() function. You also can remove specific items from the list by passing in a Type or Item. 
+
+
+
+Client::isItemBuyingOn(Client, Type or Item) 
+Client: The Client Id. Example: 2049. 
+Type: Each item has an associated integer called a Type. 
+The Item associated with the ItemData block first encountered 
+when loading will receive the integer 0. The next will receive 
+integer 1 and so on. Look in Item.cs for examples of ItemData 
+blocks like flag, ScoutVehicle, and Weapon. 
+USED IN: Currently not used in any script files. 
+RETURN: True if on the list or False if not on the list.
+ 
+Used to see if the desired Item is on the Clients buying list.  
+
+
+
+Client::setInitialTeam(Client, TeamNum) 
+Client: The Client Id. Example: 2049. 
+TeamNum: Team number.  Each team is associated with a number 
+range from -1 to 7.  Where -1 is the observer team. 
+USED IN: Currently not used in any script files. 
+RETURN: True if succeed or False if failed. 
+ 
+Used to assign the Client(player) to the TeamNum(Team). 
+
+
+
+Client::getName(Client) 
+Client: The Client Id. Example: 2049. 
+USED IN: Admin.cs, Client.cs, Game.cs, Dm.cs, Objectives.cs, ... 
+RETURN: String. Then name of the client. Example: "Sne/|keR". If failed then "" is returned. 
+ 
+Used to get the name of the client. 
+
+
+
+Client::getTeam(Client) 
+Client: The Client Id. Example: 2049.
+USED IN: Admin.cs, Ai.cs, Comchat.cs, Dm.cs, Game.cs, Item.cs, ... 
+RETURN: Number. The team the client is assigned to. If failed then -1. 
+ 
+Used to find what team the client is a member of.  
+
+
+
+Client::sendMessage(Client,StrType,String) 
+Client: The Client Id. Example: 2049. 
+StrType: There are 5 different message types 0, 1, 2, 3, and 4. 
+       0: Is used for all System messages. 
+       1: Is used for all Game messages. 
+       2: Is used for all Chat messages. 
+       3: Is used for all Team Chat messages. 
+       4: Is used for all Command messages. 
+String: The message to be sent. 
+USED IN: Admin.cs, Ai.cs, Item.cs, Objective.cs, Player.cs, ... 
+RETURN: True if succeed or False if failed. 
+ 
+Used to send a message to a specific client. The messages show up in the message dialog box on the hud.  
+
+
+
+Client::sendMessage(Client,StrType,String) 
+Client: The Client Id. Example: 2049. 
+ScoreString: The string that will be displayed. 
+SortValue: The value ScoreStrings will be sorted by. 
+USED IN: Dm.cs, Objectives.cs 
+RETURN: True if succeed or False if failed. 
+ 
+Used to set the clients score value on the TAB screen. I'll explain this function call below: 
+          Client::setScore(%cl, "%t\t " @ %cl.Score @ "\t%p\t%l", 
+                           %cl.Score); 
+%cl is the Client Id.  The "%t\t ": %t will print the clients name and the \t will tab over to the next column (which is defined in the setClientScoreHeading function call).  The %cl.Score is the Clients score. The "\t%p\t%l": \t will tab over to the next column. %p will display the Clients ping. \t will tab over to the next column. %l will display the Clients packet loss. The last argument %cl.Score will sort the list by the Score. Sorts high to low.  
+
+
+
+setClientScoreHeading(HString) 
+HString: The heading for the client scores on the tab screen. 
+USED IN: Dm.cs, Objectives.cs 
+RETURN: True if succeed or False if failed. 
+ 
+Sets the heading for the client score section of the tab screen. For Example: 
+          setTeamScoreHeading("Player Name\t\x6FTeam\t\xA6Score 
+                               \t\xCFPing\t\xEFPL"); 
+It will print Player Name and then move 6Fhex units to the right and print Team.  After Team it will move over to the A6hex unit and display Score.  Ping and PL will be displayed in the same manner. The 6F, A6, CF, FF are all hex values from 0 to FF.  
+
+
+
+setClientScoreHeading(HString) 
+HString: The heading for the client scores on the tab screen. 
+USED IN: Dm.cs, Objectives.cs 
+RETURN: True if succeed or False if failed. 
+ 
+Sets the heading for the client score section of the tab screen. For Example: 
+          setTeamScoreHeading("Player Name\t\x6FTeam\t\xA6Score 
+                               \t\xCFPing\t\xEFPL"); 
+It will print Player Name and then move 6Fhex units to the right and print Team.  After Team it will move over to the A6hex unit and display Score.  Ping and PL will be displayed in the same manner. The 6F, A6, CF, FF are all hex values from 0 to FF.  
+
+
+
+Client::setGuiMode(Client, GUIMode) 
+Client: The Client Id. Example: 2049. 
+GUIMode: There are 6 predefined Modes. 
+       1: $GuiModePlay = 1. Regular play mode. 
+       2: $GuiModeCommand = 2. Command Screen. 
+       3: $GuiModeVictory = 3. Objective Screen. 
+       4: $GuiModeInventory = 4. Inventory Screen. 
+       5: $GuiModeObjectives = 5. Objective Screen. 
+       6: $GuiModeLobby = 6. Modify hud mode. 
+USED IN: Admin.cs, Game.cs, Player.cs, Server.cs, Station.cs, ... 
+RETURN: True if succeed or False if failed. USED IN: Dm.cs, Objectives.cs 
+
+ 
+Used to set the GUI in its different mode/screens.  To set the GUI in command map mode you would call the function and pass in $GuiModeCommand for the GuiMode argument.  
+
+
+
+Client::getGuiMode(Client) 
+Client: The Client Id. Example: 2049. 
+GUIMode: There are 6 predefined Modes. 
+USED IN: Admin.cs, Game.cs, Observer.cs, Station.cs 
+RETURN: GUIMode. GUIMode will be a value between 1 and 6. If failed then -1. 
+
+ 
+Used to get what GUIMode the client is currently in.  If the Client is in the Command map screen then 2 will be returned.  
+
+
+
+Client::ExitLobbyMode() 
+USED IN: GUI.cs 
+RETURN: True. 
+ 
+Used to bring you back to the game after pressing the ESC key. Pressing the ESC key will bring you to a screen with the following options Disconnect, Return To Game, Options, Play, and IRC/Chat.  
+
+
+
+Client::getVoiceBase(Client) 
+Client: The Client Id. Example: 2049. 
+USED IN: Ai.cs 
+RETURN: String. The voice base. Example: Male1, Male2, Female1, ... If failed then "". 
+ 
+String. The voice base. Example: Male1, Male2, Female1, ... If failed then "".  
+
+
+
+Client::getSkinBase(Client) 
+Client: The Client Id. Example: 2049. 
+USED IN: Currently not used in any script files. 
+RETURN: String. Name of the skin. Current names: beagle, dsword, cphoenix, swolf, and base. 
+ 
+Used to get the what skin the Client(player) is currently wearing.  
+
+
+
+Client::getGender(Client) 
+Client: The Client Id. Example: 2049.
+USED IN: Game.cs, Item.cs 
+RETURN: String. "Male" or "Female". If failed then "". 
+ 
+Used to get the Clients gender.  
+
+
+
+Client::centerPrint(String, Position) 
+String: Message to be displayed. 
+Position: There are 3 predefined positions. 
+      0: Displays the String in the center of the screen. 
+      1: Displays the String on the bottom of the screen. 
+      2: Displays the String on the top of the screen. 
+USED IN: Admin.cs, Client.cs, Game.cs, Server.cs 
+RETURN: True if succeed or False if failed. 
+ 
+Will display the String at the specified Position. To remove the the centerPrint simply pass in a blank string Example: "".  
+
+
+
+Client::getMouseSensitivity(ActionMap) 
+ActionMap: Is dependent on what mode the player is in.  Different key inputs are definded for diffent modes. Example: Playing the game will use playMap.sae as its ActionMap. For this function actionMap should equal "playMap.sae". 
+USED IN: Options.cs 
+RETURN: Float. Value between 0 and 100. 
+ 
+Used to find what sensitivity your mouse is set at.  
+
+
+
+Client::getMouseXAxisFlip(ActionMap) 
+ActionMap: Is dependent on what mode the player is in.  Different key inputs are definded for diffent modes. Example: Playing the game will use playMap.sae as its ActionMap. For this function actionMap should equal "playMap.sae".
+USED IN: Options.cs 
+RETURN: True if succeed or False if failed. 
+ 
+Used to reverse the mouse X axis.  
+
+
+
+Client::getMouseYAxisFlip(ActionMap) 
+ActionMap: Is dependent on what mode the player is in.  Different key inputs are definded for diffent modes. Example: Playing the game will use playMap.sae as its ActionMap. For this function actionMap should equal "playMap.sae".
+USED IN: Options.cs 
+RETURN: True if succeed or False if failed.
+ 
+Used to reverse the mouse Y axis.  
+
+
+
+getClientByName(Name) 
+Name: The name of the player.  Example: Sne/|keR.
+USED IN: Client.cs 
+RETURN: Client Id. The clients Id number. Example: 2049 
+  
+ 
+Used to find what the players Client Id is by using the players name.  
+
+
+
+
+
+
+  
+
+
+  
+  
+
+  

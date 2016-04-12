@@ -1,0 +1,130 @@
+Object - File Functions 
+ Updated 04/14/99 
+
+isFile(FileName) 
+ 
+FileName: The full path name and file name.
+USED IN: GUI.cs, Menu.cs, Registervolume.cs 
+RETURN: True if it does exist. False if failed or doesnt exist.  
+Used to see if the FileName exists.  
+
+which(Script) 
+ 
+Script: Name of a script file. Example: "Item.cs", "Game.cs".
+USED IN: Currently not used in any script files. 
+RETURN: Path. The directory path that the Script is being ran from.  
+Used to find out what directory the Script is currently being ran from.  
+
+getBoxCenter(Object) 
+ 
+Object: The object Id. Example: 8361. 
+USED IN: Player.cs, Staticshape.cs 
+RETURN: String "X Y Z" coordinates. If failed then "0 0 0". 
+Used to find the center point of an object. 
+          For example: 
+             Object = 8489;     (8489 is the Id of a turret) 
+             answer = getBoxCenter(Object); 
+             answer is equal to "100 230 50".  Which is the X Y Z value 
+             of the center point of the Object.  
+
+getObjectType(Object) 
+ 
+Object: The object Id. Example: 8361 
+USED IN: Player.cs, Item.cs, Mine.cs, Moveable.cs, Objectives.cs... 
+RETURN: Type. Returns the name of the class the object was derived from. Example: Player or Flier.. etc. 
+Is used to find the type of the Object. 
+          For Example: 
+             Type = getObjectType(Object); 
+             Type is equal to "Player" because the Object Id passed 
+             in was created from the player class.  
+
+getObjectByTargetIndex(ObjectIdx) 
+ 
+ObjectIdx: Index into a visible object array.
+USED IN: Player.cs 
+RETURN: Object Id.  The Id of the object at that index location. If failed then -1. 
+Used to return the visible object at the index. All objects that are visible because of sensor or player LOS gets added to a visable object array.  
+
+loadObject(Name, Object) 
+ 
+Name: Name to be assigned to the object. 
+Object: The object and it full path name to be loaded. 
+USED IN: Client.cs 
+RETURN: Object Id of the new loaded object. If failed then 0. 
+Used to load the Object and assign it the Name.  
+
+storeObject(Object, Name) 
+ 
+Object: The object to be stored. 
+Name: The full path name and file name to be store under. 
+USED IN: GUI.cs 
+RETURN: True if succeed or False if failed. 
+Used to store the Object and all child objects that are associated with that object.  
+
+deleteObject(Object) 
+ 
+Object: The object Id. Example: 8361. 
+USED IN: Game.cs, Item.cs, Menu.cs, Station.cs, Server.cs, ... 
+RETURN: True if succeed or False if failed. 
+Used to delete the specified Object from the managers object list.  
+
+isObject(Object) 
+ 
+Object: The object Id. Example: 8361. 
+USED IN: Client.cs, Editor.cs, GUI.cs, Menu.cs, ... 
+RETURN: True if it is a valid object. False if failed or not.  
+Used to see if the Object Id passed in is a valid object.  
+
+listObjects() 
+ 
+USED IN: Most common use is in the Console screen. 
+RETURN: Objects.  All objects in the mission. 
+Used to list all the objects currently used in the mission.  
+
+newObject(ObjName, Class, <ExtraArg>) 
+ 
+Object: The name of the object. 
+Class: Type of object to create. 
+ExtraArg: Some Classes require extra arguments.
+USED IN: Chatmenu.cs, Editor.cs, Game.cs, GUI.cs, Item.cs, ... 
+RETURN: True if succeed or False if failed.  
+Used to create an object. Different types of class take different extra arguments. The list below is the most common Classes used. 
+
+
+--------------------------------------------------------------------------------
+
+         Item: 
+             dataFile: Object to be created. Example: "Chaingun" 
+             count: Number of items associated with that object. Example: 
+                    a pack of disc ammo has 5 disc so the count would be 5. 
+             pop: Not used. 
+             <rotate>: Optional. If True is passed in then the object will 
+                       rotate on its Z axis. 
+             <collide>: Optional. If True is passed in then the collison mask 
+                        information is setup. 
+
+
+--------------------------------------------------------------------------------
+
+          StaticBase: 
+             dataFile: Object to be created. 
+             <DOD>: Optional. If True is passed in then the object will be 
+                    deleted if it is destroyed. 
+
+
+--------------------------------------------------------------------------------
+
+          Flier: 
+             Uses the StaticBase class. 
+
+
+--------------------------------------------------------------------------------
+
+            ChatMenu: 
+               Heading: Will set the heading of the menu. 
+ 
+
+
+  
+
+  

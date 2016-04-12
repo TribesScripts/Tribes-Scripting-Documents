@@ -1,0 +1,37 @@
+Vehicle Functions 
+ Updated 04/09/99 
+
+Vehicle::canMount(VObject, Player or Client) 
+VObject: The vehicle object Id. 
+Player: The object Id. Example: 8361. 
+Client: The Client Id. Example: 2049. 
+USED IN: Vehicle.cs 
+RETURN: True if Player or Client can mount the vehicle. False if can't mount or failed. 
+Used to see if there is room for the Player or Client to mount the VObject.  
+
+Vehicle::nextPassengerPoint(Vobject) 
+VObject: The vehicle object Id.
+USED IN: Not currently used in any script files. 
+RETURN: Number. The next available mount point. If failed then -1. 
+Used to get the next available mount point on the vehicle. 
+
+Vehicle::incPassengers(Vobject) 
+VObject: The vehicle object Id.
+USED IN: Not currently used in any script files. 
+RETURN: True if succeed or False or -1 if failed. 
+Used to increment the passenger counter for the VObject.  
+
+Vehicle::incPassengers(Vobject) 
+VObject: The vehicle object Id.
+USED IN: Not currently used in any script files. 
+RETURN: True if succeed or False or -1 if failed. 
+Used to decrement the passenger counter for the VObject.  
+
+Vehicle::getMountPoint(Vobj, Mpoint) 
+Vobj: The object Id of the vehicle. 
+Mpoint: The mount point.
+USED IN: Vehicle.cs 
+RETURN: Position. The X, Y, and Z position of the Mpoint. Example: "X Y Z". 
+Used to get the position of the desired Mpoint. There are two Mpoints on a Scout, four on a LPC, and six on an HPC. Mpoint zero is the driver mount position. Mpoint one is the drivers exit point. Mpoints two through six are the passenger Mpoints.  
+
+  

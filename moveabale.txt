@@ -1,0 +1,127 @@
+Moveable Functions 
+ Updated 04/09/99 
+
+HOW TO SET UP MOVEABLES: 
+
+<Example taken from the Broadside.MIS file.> 
+instant SimGroup "LowerElevator" {    // Sim Group. 
+ instant SimPath "Path1" {          // Sim Path. Markers go inside. 
+   instant Marker "Marker1" {       // Marker 0. 
+     dataBlock = "PathMarker"; 
+  }; 
+  
+  instant Marker "Marker1" {      // Marker 1 
+     dataBlock = "PathMarker"; 
+  }; 
+ }; 
+ instant Moveable "elevator_8x41" { // Object to move. MoveObj. 
+ }; 
+}; 
+
+If MoveObj is an elevator then the MoveObj will be set to Marker0 
+position. The elevator Starts at Marker0 and moves to Marker1 then 
+Marker2 and so on till hit its the top.  After hitting the top it 
+moves back to Marker0 passing through all other Markers. There are 
+Flags you can set in the instant Moveable data block area. If power 
+is lost then the elevator will return to Marker0. 
+Must set the following to 1 for it work: 
+loop   The elevator will move without being triggered. 
+stopWayUp - Will stop at all Markers on the way up. 
+stopWayDown - Will stop at all Markers on the way down. 
+noTeam - Any team can trigger the elevator. 
+triggerHit - Elevator must be triggered by an external object. 
+
+If MoveObj is a Door then the door will be set to the center 
+Marker. Example: You have Rdoor and Ldoor. In the SimPath you have 
+Marker0, Marker1, and Marker2. The doors will start at Marker1. When 
+opened the Ldoor will move to Marker0 and Rdoor will move to Marker2. 
+
+
+
+
+Moveable::moveToWaypoint(MoveObj, Waypoint) 
+MoveObj: Moveable object Id defined by the Moveable data block. 
+Waypoint: Waypoints define what path the object will follow.
+USED IN: Moveable.cs 
+RETURN: True if succeed or False if failed.  
+Used to move the MoveObj to the desired Waypoint.  NOTE: If MoveObj is at Waypoint four and you want it to go to Waypoint zero.  To get to zero it will go to Waypoint three, two, one, and then to zero.  
+
+
+
+
+Moveable::moveForward(MoveObj) 
+MoveObj: Moveable object Id defined by the Moveable data block.
+USED IN: Currently not used in any script files. 
+RETURN: True if succeed or False if failed. d.  
+Used to move the MoveObj to the next Waypoint.  
+
+  
+
+Moveable::moveBackward(MoveObj) 
+MoveObj: Moveable object Id defined by the Moveable data block.
+USED IN: Currently not used in any script files. 
+RETURN: True if succeed or False if failed.  
+Used to move the MoveObj back one Waypoint.  
+
+ 
+
+
+
+
+
+
+Moveable::stop(MoveObj) 
+ 
+MoveObj: Moveable object Id defined by the Moveable data block..
+USED IN: Moveable.cs 
+RETURN: True if succeed or False if failed. 
+Used to stop the MoveObj.  
+
+
+
+
+
+
+Moveable::getState(MoveObj) 
+ 
+MoveObj: Moveable object Id defined by the Moveable data block. 
+USED IN: Currently not used in any script files. 
+RETURN: State. String defining the state of the object. 
+Used to get the current state of the MoveObj. There are four states: Undefined, MoveForward, MoveBackward, and Stop.  
+
+
+
+
+
+Moveable::getWaypointCount(MoveObj) 
+ 
+MoveObj: Moveable object Id defined by the Moveable data block. 
+USED IN: Moveable.cs 
+RETURN: Number. The total number of waypoints associated with the Moveobj. If failed then 0. 
+Used to get the total number of waypoints associated with the MoveObj.  
+
+
+
+
+
+Moveable::getPosition(MoveObj) 
+ 
+MoveObj: Moveable object Id defined by the Moveable data block. 
+USED IN: Moveable.cs 
+RETURN: Number. The waypoint. If failed then 0. 
+Used to get the waypoint the MoveObj is currently at or going to.  
+
+
+
+
+
+Moveable::setWaypoint(MoveObj, Waypoint) 
+ 
+MoveObj: Moveable object Id defined by the Moveable data block. 
+Waypoint: Waypoints define what path the object will follow.. 
+USED IN: Moveable.cs 
+RETURN: True if succeed or False if failed. 
+Used to set what Waypoint the MoveObj is currently at.  
+
+
+  
